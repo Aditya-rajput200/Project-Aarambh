@@ -29,12 +29,12 @@ const serviceSchema = new Schema({
     description: String,
     price: Number,
     imageUrl: String,
-    creatorId: ObjectId
+    creatorId: ObjectId   // worker id 
 });
 
 const purchaseSchema = new Schema({
     userId: ObjectId,
-    courseId: ObjectId
+    serviceId: ObjectId
 });
 
 const userModel = mongoose.model('user', userSchema);
