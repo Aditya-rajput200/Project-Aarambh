@@ -5,8 +5,8 @@ const { adminRouter } = require("./routes/admin");
 
 const app = express();
 
-// app.use('/user', userRouter);
-// app.use('/admin', adminRouter);
+app.use('/user', userRouter);
+app.use('/admin', adminRouter);
 
 
 app.listen(3000, () => {

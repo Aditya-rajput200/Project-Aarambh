@@ -16,6 +16,7 @@ dist-ssr
 
 #env
 .env
+.tex
 
 #package-lock.json
 package-lock.json
@@ -29,4 +30,4 @@ package-lock.json
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
+*.sw?h

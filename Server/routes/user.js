@@ -90,6 +90,20 @@
 //     })
 // })
 
-// module.exports = {
-//     userRouter: userRouter
-// }
+
+
+
+
+const { Router } = require('express');
+
+const userRouter = Router();
+const userControler = require('../controlers/user');
+
+userRouter.post('/createBokking',userControler.createBokking);
+
+
+userRouter.post('/createReview',userControler.createReview);
+
+module.exports = {
+    userRouter
+}
