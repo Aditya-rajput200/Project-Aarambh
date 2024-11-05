@@ -14,7 +14,7 @@
 
 
 
-import prisma from "../lib/prisma";
+const prisma = require("../lib/prisma")
 
 // create bokking
 exports.createBokking = async (req, res) =>{
@@ -35,13 +35,9 @@ exports.createBokking = async (req, res) =>{
             location
 
 
-        }
+        }})  
 
-       
-
-    })
-
-    res.status(200).json("New bokking is create ")}
+    res.status(200).json("New bokking is create " + newBokking)}
 
 
  // previous bokking

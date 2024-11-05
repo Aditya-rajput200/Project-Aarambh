@@ -9,6 +9,7 @@ datasource db {
 
 model User {
   id       String   @id @default(uuid())
+  
   name     String
   email    String   @unique
   phone    Int      @unique
@@ -86,6 +87,7 @@ model Review {
   userId      String
   worker      Worker   @relation(fields: [workerId], references: [id])
   workerId    String
+  
 }
 
 enum BookingStatus {

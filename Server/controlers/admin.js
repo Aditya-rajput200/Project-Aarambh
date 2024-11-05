@@ -41,8 +41,8 @@ const prisma = require("../lib/prisma")
 // create categeory 
 
 exports.createCategory = async (req, res)=>{
-   
-    const {name , image,description} = await req.body;
+   console.log(req.body)
+    const {name ,description, image} = await req.body;
 
     try {
 
