@@ -12,8 +12,11 @@ model User {
   
   name     String
   email    String   @unique
-  phone    Int      @unique
+  phone    String   @unique
   password String
+  location  String    @default("India")
+  image     String  @default("adi.png")
+  
 
   workers  Worker[]
   orders   Booking[]
@@ -94,4 +97,9 @@ enum BookingStatus {
   pending
   delivered
   paid
+}
+enum User_Role {
+  USER
+  ADMIN
+  WORKER
 }

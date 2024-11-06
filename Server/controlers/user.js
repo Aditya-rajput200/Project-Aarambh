@@ -16,6 +16,7 @@
 
 const prisma = require("../lib/prisma")
 
+
 // create bokking
 exports.createBokking = async (req, res) =>{
     const {workerId,userId,serviceId,date,price,location} = req.body;

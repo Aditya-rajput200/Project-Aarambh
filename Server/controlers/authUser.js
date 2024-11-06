@@ -1,9 +1,10 @@
 
 const prisma = require("../lib/prisma")
 const bcrypt = require('bcrypt');
+const { z } = require("zod");
 
+const {createToken} = require("../middleware/auth");
 
-const {createToken} = require("../middleware/auth")
 
 
 
@@ -29,7 +30,11 @@ exports.Login_email = async (req, res) => {
    const userPassword = await bcrypt.compare(password,user.password)
 
    if(userPassword){
-    const token =  await createToken(user.id)
+    const token =  await createToken({
+        id: user.id,
+      
+        role: user.role
+    })
      res.status(200).json(token + "User loged in succesfully")
    }
   
@@ -44,7 +49,20 @@ exports.Login_email = async (req, res) => {
 
     // phone and otp verification 
     exports.Login_phone = async (req, res) => {
-        const { phone, otp } = req.body;
+        const phone= req.body;
+        z.number().nonnegative().max(10).min(10)
+        // checks 
+        const user = await prisma.user.findUnique({
+            where:{
+                phone
+            }
+        })
+        
+        if(!user){
+            return res.status(500).json("Phone number does not exists ")
+        }
+
+
 
     };
 
@@ -89,11 +107,11 @@ exports.SignUp = async (req,res) =>{
         where:{
             phone
         }
-    })
+    }) 
   
    if(AllreadyExist_phone){
        return res.status(400).json("Phone already exist")
-   }
+   }  
 
    const hashedPassword = await bcrypt.hash(password, 10)
 
