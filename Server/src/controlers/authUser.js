@@ -120,7 +120,9 @@ exports.SignUp = async (req,res) =>{
    try {
     const newUser = await prisma.user.create({
         data:{
-            email,phone,password:hashedPassword,name,location,image
+            email,phone,password:hashedPassword,name,location,image,
+            role:"User"
+
         }
     })
 

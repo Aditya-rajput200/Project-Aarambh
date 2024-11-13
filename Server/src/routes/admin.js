@@ -33,6 +33,7 @@ adminRouter.get('/getCategory',adminControler.getCategory );
 adminRouter.get('/getAllWorkers',adminControler.getAllWorkers );
 
 adminRouter.get('/getWorkerById',adminControler.getWorkerById );
+adminRouter.delete('/deleteWorker',adminControler.deleteWorkerById)
 
 
 
@@ -43,7 +44,7 @@ adminRouter.get('/getBokkingById',adminControler.getBokkingById);
 
 
 
-
+adminRouter.post("/createServies", adminControler.createServies)
 
 
 

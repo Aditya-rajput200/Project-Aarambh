@@ -4,8 +4,8 @@ require("dotenv").config();
 const JWT_SECRET = process.env.JWT_SECRET; 
 
 // Creating token for user
-const createToken = async (id) => {
-    const token = jwt.sign({ id }, JWT_SECRET, {
+const createToken = async (id,role) => {
+    const token = jwt.sign({ id,role }, JWT_SECRET, {
         expiresIn: 3 * 24 * 60 * 60 // expires in 3 days
     });
     return token;
@@ -13,7 +13,7 @@ const createToken = async (id) => {
 
 // Validating user token
 const auth = async (req, res, next) => {
-    const token = req.headers.token ;
+    const token = req.headers.token;
     if (!token) {
         return res.status(400).json("Login data lost, please login again or token is missing");
     }

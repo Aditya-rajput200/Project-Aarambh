@@ -9,13 +9,13 @@ datasource db {
 
 model User {
   id       String   @id @default(uuid())
-  
+  role  User_Role    @default(USER)
   name     String
   email    String   @unique
   phone    String   @unique
   password String
-  location  String    @default("India")
-  image     String  @default("adi.png")
+  location  String?    @default("India")
+  image     String?  @default("adi.png")
   
 
   workers  Worker[]
@@ -30,13 +30,13 @@ model Booking {
   worker      Worker   @relation(fields: [workerId], references: [id])
   workerId    String
 
-service     Service  @relation(fields: [serviceId], references: [id])
+  service     Service  @relation(fields: [serviceId], references: [id])
   serviceId   String
 
   location    String
-  date        DateTime
-  time        String
-  price       Int
+ 
+  time        DateTime
+  price       Float
   status      BookingStatus
 
   isActive    Boolean  @default(true)
@@ -56,7 +56,7 @@ model Service {
   id          String  @id @default(uuid()) 
   name        String
   description String
-  
+ 
   category    Category @relation(fields: [categoryId], references: [id])
   categoryId  String
 
@@ -69,22 +69,24 @@ model Worker {
   id          String    @id @default(cuid())
   name        String
   email       String    @unique
-  phone       Int       @unique
+  phone       String       @unique
   password    String
-  adhaarId    Int       @unique
+  image       String?
+  addresh     String
+  adhaarId    String       @unique
   isVerified  Boolean   @default(false)
   isActive    Boolean   @default(true)
 
   reviews     Review[]
   bookings    Booking[]
-  user        User      @relation(fields: [userId], references: [id])  
-  userId      String
+  user        User[] 
+
 }
 
 model Review {
   id          String   @id @default(cuid())
   stars       Int
-  comment     String
+  comment     String?
 
   user        User     @relation(fields: [userId], references: [id])
   userId      String

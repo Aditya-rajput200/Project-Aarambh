@@ -7,8 +7,7 @@ const userAuth = require("../controlers/authUser");
 const { auth } = require("../middleware/auth");
 const { AuthorizeRole } = require("../middleware/roleAuth");
 
-// Example roles, e.g., "admin", "user", "worker", etc.
-// Modify the roles based on your specific role requirements for each route
+
 
 userRouter.post("/createbokking", auth, AuthorizeRole("user"), userControler.createBokking);
 

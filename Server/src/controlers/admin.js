@@ -1,47 +1,9 @@
-// admin can create the category  ************
-
-// admin can update category   *******
-
-// admin can delete category  ********
-
-//admin can get all  the category  *******
-
-
-
-
-// admin can get all services  
-
-// admin can Create Services 
-
-// admin can update Services
-
-// admin can  delete Services
-
-
-
-
-// admin can verify the worker
-// admin can  get  all wokers  *****
-// admin can get workers by id  ******
-
-
-
-// admin can get the all active bokking *****
-// admin can get the boking by id    *****
-
-
-
-// categeory wise services 
-
-
-
 const prisma = require("../lib/prisma")
 
 
 // create categeory 
-
 exports.createCategory = async (req, res)=>{
-   console.log(req.body)
+   console.log(req.body) 
     const {name ,description, image} = await req.body;
 
     try {
@@ -142,6 +104,16 @@ exports.getAllWorkers = async (req, res) => {
     }
 }
 
+exports.deleteWorkerById = async (req, res) =>{
+    const {id}  = req.body;
+    const DeleteWorker = await prisma.worker.delete({
+        where: {
+            id
+        }
+    })
+    res.status(200).json("Worker deleted"+DeleteWorker)
+}
+
 
 // get workers by id
 
@@ -203,4 +175,35 @@ exports.getBokkingById = async (req,res) =>{
     }
   
 
+
+
 }
+
+
+// services 
+
+//1> create
+
+exports.createServies = async (req,res) =>{
+    const  {name,description, categoryId}  = req.body;
+    if(!name || !description || !categoryId){
+     return res.status(404).json("Provide all details")
+    }
+    const services = await prisma.service.create ({
+        data:{
+            name,
+            description,
+            category : {
+                connect:{id:categoryId}
+            }
+          
+        }
+    })
+
+    res.status(201).json("New services is added")
+    console.log(services)
+
+}
+//2> update
+//3>  delete
+
