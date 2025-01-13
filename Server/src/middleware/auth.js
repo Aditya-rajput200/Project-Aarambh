@@ -13,7 +13,8 @@ const createToken = async (id,role) => {
 
 // Validating user token
 const auth = async (req, res, next) => {
-    const token = req.headers.token;
+    const token = req.cookie.accesToken;
+    console.log(token)
     if (!token) {
         return res.status(400).json("Login data lost, please login again or token is missing");
     }

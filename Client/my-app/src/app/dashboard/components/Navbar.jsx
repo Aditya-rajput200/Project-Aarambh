@@ -1,6 +1,6 @@
 import React from 'react'
 
-function page() {
+function Navbar() {
   return (
     <div>
       
@@ -9,4 +9,4 @@ function page() {
   )
 }
 
-export default page
+export default Navbar

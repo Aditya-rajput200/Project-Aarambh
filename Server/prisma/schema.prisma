@@ -59,12 +59,9 @@ model Service {
  
   category    Category @relation(fields: [categoryId], references: [id])
   categoryId  String
-
-
   bookings    Booking[]
 }
   
-
 model Worker {
   id          String    @id @default(cuid())
   name        String
